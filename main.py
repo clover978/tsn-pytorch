@@ -22,7 +22,7 @@ def main():
     args = parser.parse_args()
 
     if args.dataset == 'ucf101':
-        num_class = 101
+        num_class = 101  ## config your dataset classes here
     elif args.dataset == 'hmdb51':
         num_class = 51
     elif args.dataset == 'kinetics':
@@ -246,7 +246,7 @@ def validate(val_loader, model, criterion, iter, logger=None):
 
 
 def save_checkpoint(state, is_best, filename='checkpoint.pth.tar'):
-    filename = '_'.join((args.snapshot_pref, args.modality.lower(), filename))
+    filename = '_'.join((args.snapshot_pref, args.modality.lower(), state['epoch'], filename))
     torch.save(state, filename)
     if is_best:
         best_name = '_'.join((args.snapshot_pref, args.modality.lower(), 'model_best.pth.tar'))
